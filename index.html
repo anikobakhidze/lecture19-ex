@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration form</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <h2 class="heading">Registration Form</h2>
+        <form class="flex">
+          <input class="input" type="text" id="name" placeholder="Name" />
+          <input
+            class="input"
+            type="text"
+            name=""
+            id="surname"
+            placeholder="Surname"
+          />
+          <input class="input" type="number" id="age" placeholder="Age" />
+          <input
+            class="input"
+            type="text"
+            id="username"
+            placeholder="Username"
+          />
+          <input
+            class="input"
+            type="password"
+            id="password"
+            placeholder="Password"
+            name="password"
+            autocomplete="on"
+          />
+          <div class="terms flex">
+            <input type="checkbox" id="checkbox" onclick="checkboxClicked()" />
+            <label for="checkbox"
+              ><a class="terms-cond" href="#">Terms&conditions</a></label
+            >
+          </div>
+          <button onclick="checkUser()" class="btn" id="registrationBtn">
+            Register
+          </button>
+        </form>
+        <p id="fields" class="hidden">** Please, Fill the registation fields</p>
+        <p id="checkboxError" class="hidden">
+          Agree to the terms and conditions
+        </p>
+        <p id="usernameLength" class="hidden">
+          ** Username must have more than 3 characters
+        </p>
+        <p id="ageValidation" class="hidden">
+          ** User must be 18 years old or more
+        </p>
+        <p id="passwordValidation" class="hidden">
+          ** Password must have more than 6 characters and one uppercased letter
+        </p>
+      </div>
+    </section>
+    <ul id="users"></ul>
+    <script>
+      let user = [];
+      //   function checkboxClicked() {
+      //     let checkBox = document.getElementById("checkbox");
+      //     if (checkBox.checked == false) {
+      //       let checkBoxError = document.getElementById("checkboxError");
+      //       checkBoxError.classList.remove("hidden");
+      //       checkBoxError.classList.add("visible");
+      //     }
+      // }
+      function getErrors(id) {
+        let clearFields = document.getElementById(id);
+        clearFields.classList.remove("hidden");
+        clearFields.classList.add("visible");
+      }
+      function checkUser() {
+        let name = document.getElementById("name");
+        let surname = document.getElementById("surname");
+        let age = document.getElementById("age");
+        let username = document.getElementById("username");
+        let password = document.getElementById("password");
+        let nameInp = name.value;
+        let surnameInp = surname.value;
+        let ageInp = age.value;
+        let usernameInp = username.value;
+        let passwordInp = password.value;
+        // let checkBox = document.getElementById("checkbox");
+        if (!nameInp || !surnameInp || !ageInp || !usernameInp) {
+          getErrors("fields");
+          // let clearFields = document.getElementById("fields");
+          // clearFields.classList.remove("hidden");
+          // clearFields.classList.add("visible");
+        } else if (usernameInp.length < 3) {
+          getErrors("usernameLength");
+          //   let clearFields = document.getElementById("usernameLength");
+          //   clearFields.classList.remove("hidden");
+          //   clearFields.classList.add("visible");
+        } else if (ageInp <= 18) {
+          getErrors("ageValidation");
+          //   let clearFields = document.getElementById("ageValidation");
+          //   clearFields.classList.remove("hidden");
+          //   clearFields.classList.add("visible");
+        } else if (passwordInp.length < 6 && !passwordInp.search(/[A-Z]/) < 1) {
+          getErrors("passwordValidation");
+          //   let clearFields = document.getElementById("passwordValidation");
+          //   clearFields.classList.remove("hidden");
+          //   clearFields.classList.add("visible");
+        } else if (!checkBox.checked) {
+          getErrors("checkboxError");
+          //   let clearFields = document.getElementById("checkboxError");
+          //   clearFields.classList.remove("hidden");
+          //   clearFields.classList.add("visible");
+        } else {
+          clearFields.classList.remove("visible");
+          clearFields.classList.add("hidden");
+          user.push(`name: ${nameInp}, surname:${surnameInp}`);
+          name.value = " ";
+          surname.value = " ";
+        }
+      }
+    </script>
+  </body>
+</html>
