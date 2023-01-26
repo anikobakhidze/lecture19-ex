@@ -29,6 +29,7 @@
             id="username"
             placeholder="Username"
           />
+
           <input
             class="input"
             type="password"
@@ -37,19 +38,38 @@
             name="password"
             autocomplete="on"
           />
+          <div class="show-pass">
+            <input
+              type="checkbox"
+              id="toggle"
+              onclick="passFunc()"
+              class="pass-checkbox"
+            />
+            <label class="terms-cond" for="toggle">Show Password</label>
+          </div>
+
           <div class="terms flex">
-            <input type="checkbox" id="checkbox" onclick="checkboxClicked()" />
+            <input type="checkbox" id="checkbox" />
             <label for="checkbox"
               ><a class="terms-cond" href="#">Terms&conditions</a></label
             >
           </div>
-          <button onclick="checkUser()" class="btn" id="registrationBtn">
-            Register
-          </button>
+          <div class="btn-wrapper">
+            <button class="btn" id="regBtn" onclick="checkUser()">
+              Register
+            </button>
+            <button class="btn" onclick="getUser()">Get Users</button>
+          </div>
         </form>
+        <div class="modal hidden" id="modal">
+          <div class="wrapper">
+            <h2>Users List</h2>
+            <ul id="users"></ul>
+          </div>
+        </div>
         <p id="fields" class="hidden">** Please, Fill the registation fields</p>
         <p id="checkboxError" class="hidden">
-          Agree to the terms and conditions
+          **Agree to the terms and conditions
         </p>
         <p id="usernameLength" class="hidden">
           ** Username must have more than 3 characters
@@ -62,67 +82,7 @@
         </p>
       </div>
     </section>
-    <ul id="users"></ul>
-    <script>
-      let user = [];
-      //   function checkboxClicked() {
-      //     let checkBox = document.getElementById("checkbox");
-      //     if (checkBox.checked == false) {
-      //       let checkBoxError = document.getElementById("checkboxError");
-      //       checkBoxError.classList.remove("hidden");
-      //       checkBoxError.classList.add("visible");
-      //     }
-      // }
-      function getErrors(id) {
-        let clearFields = document.getElementById(id);
-        clearFields.classList.remove("hidden");
-        clearFields.classList.add("visible");
-      }
-      function checkUser() {
-        let name = document.getElementById("name");
-        let surname = document.getElementById("surname");
-        let age = document.getElementById("age");
-        let username = document.getElementById("username");
-        let password = document.getElementById("password");
-        let nameInp = name.value;
-        let surnameInp = surname.value;
-        let ageInp = age.value;
-        let usernameInp = username.value;
-        let passwordInp = password.value;
-        // let checkBox = document.getElementById("checkbox");
-        if (!nameInp || !surnameInp || !ageInp || !usernameInp) {
-          getErrors("fields");
-          // let clearFields = document.getElementById("fields");
-          // clearFields.classList.remove("hidden");
-          // clearFields.classList.add("visible");
-        } else if (usernameInp.length < 3) {
-          getErrors("usernameLength");
-          //   let clearFields = document.getElementById("usernameLength");
-          //   clearFields.classList.remove("hidden");
-          //   clearFields.classList.add("visible");
-        } else if (ageInp <= 18) {
-          getErrors("ageValidation");
-          //   let clearFields = document.getElementById("ageValidation");
-          //   clearFields.classList.remove("hidden");
-          //   clearFields.classList.add("visible");
-        } else if (passwordInp.length < 6 && !passwordInp.search(/[A-Z]/) < 1) {
-          getErrors("passwordValidation");
-          //   let clearFields = document.getElementById("passwordValidation");
-          //   clearFields.classList.remove("hidden");
-          //   clearFields.classList.add("visible");
-        } else if (!checkBox.checked) {
-          getErrors("checkboxError");
-          //   let clearFields = document.getElementById("checkboxError");
-          //   clearFields.classList.remove("hidden");
-          //   clearFields.classList.add("visible");
-        } else {
-          clearFields.classList.remove("visible");
-          clearFields.classList.add("hidden");
-          user.push(`name: ${nameInp}, surname:${surnameInp}`);
-          name.value = " ";
-          surname.value = " ";
-        }
-      }
-    </script>
+
+    <script src="index.js"></script>
   </body>
 </html>
